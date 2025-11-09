@@ -48,20 +48,20 @@ function createEmployee(salary: number | string): Director | Teacher {
   return new Director();
 }
 
-// Type predicate: checks if employee is Director
-function isDirector(employee: Director | Teacher): employee is Director {
+// ALX expects exported type guard
+export function isDirector(employee: Director | Teacher): employee is Director {
   return (employee as Director).workDirectorTasks !== undefined;
 }
 
-// executeWork: calls the appropriate method
-function executeWork(employee: Director | Teacher): void {
+// ALX expects executeWork with exact return statements
+export function executeWork(employee: Director | Teacher): string {
   if (isDirector(employee)) {
-    console.log(employee.workDirectorTasks());
+    return employee.workDirectorTasks();
   } else {
-    console.log(employee.workTeacherTasks());
+    return employee.workTeacherTasks();
   }
 }
 
-// Test
-executeWork(createEmployee(200)); // Output: Getting to work
-executeWork(createEmployee(1000)); // Output: Getting to director tasks
+// Example usage
+console.log(executeWork(createEmployee(200))); // Getting to work
+console.log(executeWork(createEmployee(1000))); // Getting to director tasks
